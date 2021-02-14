@@ -34,7 +34,7 @@ create operator != ( leftarg = mongo_id, rightarg = mongo_id, procedure = public
 --     end if;
 -- END;
 -- $$;
--- 
+--
 -- create or replace function public.mongo_id_out(mid bytea)
 -- returns text
 -- LANGUAGE plpgsql

@@ -35,7 +35,7 @@ Datum mongo_id_in (PG_FUNCTION_ARGS)
     hex_decode(id, strlen(id), VARDATA(result));
     SET_VARSIZE(result, sz);
 
-    regfree(&expr);   
+    regfree(&expr);
     PG_RETURN_BYTEA_P(result);
 }
 
