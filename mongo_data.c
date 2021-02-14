@@ -1,3 +1,13 @@
+/*
+A lot of credit goes to the following
+
+https://postgres.cz/wiki/Project_of_UDF_and_its_realization_at_C_for_PostgreSQL
+https://www.postgresql.org/docs/11/sql-createtype.html
+
+The following shows how the 12bytes break down into different roles
+https://docs.mongodb.com/manual/reference/method/ObjectId/
+*/
+
 #include "postgres.h"
 #include "fmgr.h"
 #include "utils/bytea.h"
@@ -46,6 +56,8 @@ Datum mongo_id_ts (PG_FUNCTION_ARGS)
     pg_time_t seconds = 0;
 
     memcpy(&s, VARDATA_ANY(vlena), 4);
+    // Mongo documentation notes that the timestamp and counter fields are big-endian
+    // this is the same as network byte ordering
     seconds = ntohl(s);
 
     //PG_RETURN_UINT64(seconds);
